@@ -2,15 +2,15 @@ from random import random
 
 
 class Linear:
-    def __init__(self, inputs):
-        self.input_size = len(inputs)
+    def __init__(self, input_size):
+        self.input_size = input_size
         self.weights = [random() for _ in range(self.input_size)]
         self.bias = 0
-        
-        self.inputs = inputs
+        self.inputs = None
         
 
-    def forward(self):
+    def forward(self, inputs):
+        self.inputs = inputs
         output = self.bias
         for w,i in zip(self.weights, self.inputs):
            
@@ -18,7 +18,7 @@ class Linear:
         return output
     
     def backward(self, target,lr):
-        output = self.forward()
+        output = self.forward(self.inputs)
         error = output - target
         self.bias -= error * lr
     
