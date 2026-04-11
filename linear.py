@@ -6,22 +6,24 @@ class Linear:
         self.input_size = input_size
         self.weights = [random() for _ in range(self.input_size)]
         self.bias = 0
-        self.inputs = None
+        
         
 
     def forward(self, inputs):
-        self.inputs = inputs
+        if len(inputs) != self.input_size:
+            raise ValueError(f"Expected {self.input_size} inputs, got {len(inputs)}")
+        
         output = self.bias
-        for w,i in zip(self.weights, self.inputs):
+        for w,i in zip(self.weights, inputs):
            
             output += i * w
         return output
     
-    def backward(self, target,lr):
-        output = self.forward(self.inputs)
+    def backward(self, target,lr,output,inputs):
+        
         error = output - target
         self.bias -= error * lr
     
         for i in range(self.input_size):
-            self.weights[i] -= error * self.inputs[i] * lr
-            
+            self.weights[i] -= error * inputs[i] * lr
+        
