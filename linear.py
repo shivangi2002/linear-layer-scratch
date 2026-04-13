@@ -27,7 +27,7 @@ class Linear:
         if self.output is None:
             raise ValueError("Must call forward() before backward()")
         
-        error = (self.output - target)*2
+        error = (self.output - target)
         
         if self.prev_error is not None:
             if abs(error) > abs(self.prev_error):
