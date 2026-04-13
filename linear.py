@@ -1,5 +1,7 @@
 from random import random
 
+def loss(output, target):
+    return (output - target) ** 2
 
 class Linear:
     def __init__(self, input_size):
