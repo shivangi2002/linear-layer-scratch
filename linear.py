@@ -41,10 +41,13 @@ class Linear:
                 
         self.lr = min(self.lr, 0.1)
         self.lr = max(self.lr, 0.0001)
-        self.bias -= error * self.lr
+        
+        gradient_bias = error
+        self.bias -= gradient_bias * self.lr
     
         for i in range(self.input_size):
-            self.weights[i] -= error * self.inputs[i] * self.lr
+            gradient = error * self.inputs[i]
+            self.weights[i] -= gradient * self.lr
             
         self.prev_error = error
         
