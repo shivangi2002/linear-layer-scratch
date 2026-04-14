@@ -12,7 +12,9 @@ class Linear:
         self.output = None
         self.prev_error = None
         self.lr = 0.01
-        
+    
+    def __call__(self, inputs):
+        return self.forward(inputs)
 
     def forward(self, inputs):
         if len(inputs) != self.input_size:
